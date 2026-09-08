@@ -189,19 +189,19 @@ export const FEED: FeedItem[] = (() => {
     "UD",
   ];
   return names.map((initials, i) => {
-    const state = STATES[Math.floor(r() * STATES.length)];
-    const city = CITIES[state][Math.floor(r() * CITIES[state].length)];
+    const state = pick(STATES, r());
+    const city = pick(CITIES[state] as string[], r());
     return {
       id: i,
       minsAgo: 2 + i * 3 + Math.floor(r() * 3),
       initials,
-      color: avatarColors[i % avatarColors.length],
+      color: pick(avatarColors, (i % avatarColors.length) / avatarColors.length),
       city,
       state,
-      event: EVENT_TYPES[Math.floor(r() * EVENT_TYPES.length)],
+      event: pick(EVENT_TYPES, r()),
       verified: r() > 0.4,
-      text: SNIPPETS[Math.floor(r() * SNIPPETS.length)],
-      source: SOURCES[Math.floor(r() * SOURCES.length)],
+      text: pick(SNIPPETS, r()),
+      source: pick(SOURCES, r()),
     };
   });
 })();
