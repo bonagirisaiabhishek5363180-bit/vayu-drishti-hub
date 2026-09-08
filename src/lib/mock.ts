@@ -139,7 +139,7 @@ export const REPORTS: Report[] = (() => {
       verification,
       coords: `${(8 + r() * 24).toFixed(4)}, ${(69 + r() * 20).toFixed(4)}`,
       media: r() > 0.5,
-      text: SNIPPETS[Math.floor(r() * SNIPPETS.length)],
+      text: pick(SNIPPETS, r()),
       reporter: `Citizen_${state.slice(0, 2).toUpperCase()}_${1000 + Math.floor(r() * 8999)}`,
     });
   }
