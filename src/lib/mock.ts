@@ -108,16 +108,18 @@ const SNIPPETS = [
   "Fishermen advised not to venture into the sea for next 48 hours.",
 ];
 
+const pick = <T,>(arr: readonly T[], v: number): T => arr[Math.floor(v * arr.length)] as T;
+
 export const REPORTS: Report[] = (() => {
   const r = rng(20260908);
   const out: Report[] = [];
   for (let i = 0; i < 50; i++) {
-    const state = STATES[Math.floor(r() * STATES.length)];
-    const cityList = CITIES[state];
-    const city = cityList[Math.floor(r() * cityList.length)];
-    const event = EVENT_TYPES[Math.floor(r() * EVENT_TYPES.length)];
-    const severity = SEVERITIES[Math.floor(r() * SEVERITIES.length)];
-    const source = SOURCES[Math.floor(r() * SOURCES.length)];
+    const state = pick(STATES, r());
+    const cityList = CITIES[state] as string[];
+    const city = pick(cityList, r());
+    const event = pick(EVENT_TYPES, r());
+    const severity = pick(SEVERITIES, r());
+    const source = pick(SOURCES, r());
     const vRoll = r();
     const verification: Verification =
       vRoll > 0.45 ? "Verified" : vRoll > 0.15 ? "Pending" : "Rejected";
